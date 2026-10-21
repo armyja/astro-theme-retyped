@@ -22,7 +22,7 @@ const giscus = comment.giscus
   reactionsEnabled={giscus.reactionsEnabled}
   emitMetadata={giscus.emitMetadata}
   inputPosition={giscus.inputPosition}
-  theme={giscus.theme}
+  theme={giscus.theme ?? 'preferred_color_scheme'}
   lang={giscus.lang}
   loading={giscus.loading}
 >
@@ -30,4 +30,45 @@ const giscus = comment.giscus
 
 <script>
   import 'giscus'
+
+  /**
+   * 让 giscus 主题跟随站点的明暗模式。
+   * giscus 渲染在跨域 iframe 里，只能通过 postMessage 切换主题；
+   * 站点是通过 <html class="dark"> 表达明暗状态的，所以监听这个 class。
+   */
+  function resolveTheme() {
+    return document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+  }
+
+  function getIframe(): HTMLIFrameElement | null {
+    const widget = document.querySelector('giscus-widget') as any
+    // giscus-widget 是 Web Component，iframe 渲染在 shadow root 里
+    return widget?.shadowRoot?.querySelector('iframe')
+      ?? widget?.querySelector('iframe')
+      ?? null
+  }
+
+  function pushTheme() {
+    const iframe = getIframe()
+    if (!iframe?.contentWindow)
+      return false
+    iframe.contentWindow.postMessage(
+      { giscus: { setConfig: { theme: resolveTheme() } } },
+      'https://giscus.app',
+    )
+    return true
+  }
+
+  // iframe 是懒加载的，短时间内重试若干次，直到能拿到它
+  let attempts = 0
+  const timer = setInterval(() => {
+    attempts += 1
+    if (pushTheme() || attempts > 20)
+      clearInterval(timer)
+  }, 500)
+
+  new MutationObserver(() => pushTheme()).observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['class'],
+  })
 </script>

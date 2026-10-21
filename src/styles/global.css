@@ -137,3 +137,19 @@ html.dark .text-3\.5,
 html.dark .text-3 {
   color: rgb(var(--un-preset-theme-colors-primary) / 0.72);
 }
+
+/* ------------------------------------------------------------------
+ * 栏宽一致性：正文（presetTypography 的 65ch）与评论区使用同一宽度，
+ * 避免评论区比正文更宽造成左右不齐。
+ * ------------------------------------------------------------------ */
+:root {
+  --retyped-measure: 65ch;
+}
+
+.prose {
+  max-width: var(--retyped-measure);
+}
+
+.comments-wrap {
+  max-width: var(--retyped-measure);
+}
