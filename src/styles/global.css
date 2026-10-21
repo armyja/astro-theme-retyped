@@ -108,3 +108,32 @@ html.dark :where(.prose pre) {
 .clipboard-copy:hover {
   background: color-mix(in oklch, var(--uno-colors-primary) 8%, var(--uno-colors-background));
 }
+
+/* ------------------------------------------------------------------
+ * 深色模式下的正文配色
+ * presetTypography 的 --un-prose-* 是一组写死的浅色值，深色模式下不会切换，
+ * 会导致正文/标题/日期发暗、与背景糊在一起。这里按主题的 primary 重新映射，
+ * 用透明度分层保留标题与正文的层级关系。
+ * ------------------------------------------------------------------ */
+html.dark .prose {
+  --un-prose-body: rgb(var(--un-preset-theme-colors-primary) / 0.88);
+  --un-prose-headings: rgb(var(--un-preset-theme-colors-primary));
+  --un-prose-bold: rgb(var(--un-preset-theme-colors-primary));
+  --un-prose-links: rgb(var(--un-preset-theme-colors-primary));
+  --un-prose-code: rgb(var(--un-preset-theme-colors-primary));
+  --un-prose-kbd: rgb(var(--un-preset-theme-colors-primary));
+  --un-prose-quotes: rgb(var(--un-preset-theme-colors-primary) / 0.82);
+  --un-prose-quote-borders: rgb(var(--un-preset-theme-colors-primary) / 0.2);
+  --un-prose-captions: rgb(var(--un-preset-theme-colors-primary) / 0.6);
+  --un-prose-counters: rgb(var(--un-preset-theme-colors-primary) / 0.55);
+  --un-prose-bullets: rgb(var(--un-preset-theme-colors-primary) / 0.35);
+  --un-prose-hr: rgb(var(--un-preset-theme-colors-primary) / 0.15);
+  --un-prose-th-borders: rgb(var(--un-preset-theme-colors-primary) / 0.2);
+  --un-prose-td-borders: rgb(var(--un-preset-theme-colors-primary) / 0.12);
+}
+
+/* 文章列表与详情页的元信息（日期、标签）同样跟随 */
+html.dark .text-3\.5,
+html.dark .text-3 {
+  color: rgb(var(--un-preset-theme-colors-primary) / 0.72);
+}
