@@ -1,0 +1,51 @@
+{
+  "name": "astro-theme-retyped",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "A typography-first Astro blog theme: Typography's type scale & color, Retypeset's code blocks.",
+  "author": "Armyja",
+  "license": "MIT",
+  "repository": "https://github.com/armyja/astro-theme-retyped",
+  "keywords": [
+    "astro",
+    "theme",
+    "blog",
+    "typography"
+  ],
+  "exports": {
+    ".": "./index.js",
+    "./uno": "./uno.js",
+    "./layouts/*": "./src/layouts/*",
+    "./components/*": "./src/components/*",
+    "./styles/*": "./src/styles/*",
+    "./utils": "./src/utils/index.ts",
+    "./types/index.ts": "./src/types/index.ts",
+    "./config.ts": "./src/config.ts",
+    "./i18n.ts": "./src/i18n.ts",
+    "./i18n-util.ts": "./src/i18n-util.ts",
+    "./content-schema.ts": "./src/content-schema.ts"
+  },
+  "files": [
+    "index.js",
+    "uno.js",
+    "src",
+    "LICENSE",
+    "README.md"
+  ],
+  "peerDependencies": {
+    "@unocss/preset-attributify": "^66.0.0",
+    "@unocss/preset-icons": "^66.0.0",
+    "@unocss/preset-typography": "^66.0.0",
+    "@unocss/preset-wind3": "^66.0.0",
+    "@unocss/transformer-directives": "^66.0.0",
+    "@unocss/transformer-variant-group": "^66.0.0",
+    "astro": "^5.0.0",
+    "unocss": "^66.0.0",
+    "unocss-preset-theme": "^0.14.1"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.13",
+    "markdown-it": "^14.1.0",
+    "sanitize-html": "^2.17.0"
+  }
+}

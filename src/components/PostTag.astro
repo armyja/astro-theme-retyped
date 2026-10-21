@@ -1,0 +1,10 @@
+---
+interface Props {
+  tag: string
+}
+
+const { tag } = Astro.props
+const url = `/tags/${encodeURIComponent(tag)}`
+---
+
+<a href={url}># {tag}</a>

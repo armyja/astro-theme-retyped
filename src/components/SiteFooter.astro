@@ -1,0 +1,47 @@
+---
+import { themeConfig } from '../config.ts'
+
+const year = new Date().getFullYear()
+
+const { website, author, footer, socialLinks } = themeConfig.site
+
+function parseFooter(str: string) {
+  str = str.replace(/%author/g, author)
+  str = str.replace(/%website/g, website)
+  str = str.replace(/%year/g, year.toString())
+  return str
+}
+---
+
+<footer class="items-center lg:items-start flex flex-col gap-3">
+  {
+    socialLinks.length > 0 && (
+      <ul class="flex flex-row gap-2">
+        {socialLinks.map(({ href, name, icon }) => (
+          <li>
+            <a
+              href={href}
+              target={href.startsWith('http') ? '_blank' : undefined}
+              rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+              title={name}
+              aria-label={name}
+              class="not-underline-hover inline-flex items-center"
+            >
+              <span class:list={[`i-mdi-${icon ?? name}`, 'w-5 h-5']}>{name}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+
+  <div class="text-3 leading-relaxed opacity-70 flex flex-col gap-1">
+    {footer.map(str => <p set:html={parseFooter(str)} />)}
+  </div>
+</footer>
+
+<style>
+  p {
+    --at-apply: 'm-0';
+  }
+</style>

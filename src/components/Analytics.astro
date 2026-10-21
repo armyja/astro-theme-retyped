@@ -1,0 +1,14 @@
+---
+import GoogleAnalytics from './analytics/GoogleAnalytics.astro'
+import UmamiAnalytics from './analytics/UmamiAnalytics.astro'
+import { themeConfig } from '../config.ts'
+
+const PUBLIC_GOOGLE_ANALYTICS_ID = import.meta.env.PUBLIC_GOOGLE_ANALYTICS_ID
+const googleAnalyticsId = themeConfig.analytics.googleAnalyticsId || PUBLIC_GOOGLE_ANALYTICS_ID
+
+const PUBLIC_UMAMI_ANALYTICS_ID = import.meta.env.PUBLIC_UMAMI_ANALYTICS_ID
+const umamiAnalyticsId = themeConfig.analytics.umamiAnalyticsId || PUBLIC_UMAMI_ANALYTICS_ID
+---
+
+{googleAnalyticsId && <GoogleAnalytics id={googleAnalyticsId} />}
+{umamiAnalyticsId && <UmamiAnalytics id={umamiAnalyticsId} />}
