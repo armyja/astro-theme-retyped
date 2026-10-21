@@ -15,7 +15,7 @@ const tagList = (post.data as any).tags ?? []
 
 <header class="flex flex-col gap-2">
   <h1 class="post-title">
-    <a class="not-prose" href={`/posts/${post.id}`}>{post.data.title}</a>
+    <a class="not-prose" href={`/posts/${post.id}/`}>{post.data.title}</a>
   </h1>
   <div class="text-3.5 flex flex-row flex-wrap items-center gap-x-2 gap-y-1">
     <span>{t(post.data.modDate ? 'updated_at' : 'posted_at')}</span>

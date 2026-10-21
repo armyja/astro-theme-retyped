@@ -61,5 +61,5 @@ export function formatDate(date: Date, format: string = 'YYYY-MM-DD') {
 
 /** 标签对应的 URL slug（中文标签保持原样，仅做 URL 编码） */
 export function getTagUrl(tag: string) {
-  return `/tags/${encodeURIComponent(tag)}`
+  return `/tags/${encodeURIComponent(tag)}/`
 }
